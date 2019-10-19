@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
+import Day from './Day';
 
-export class Month extends Component<{name: string},{}> {
+export class Month extends Component<{name: string, days: number},{}> {
     render(){
         return <table>
             <thead>
@@ -9,14 +10,23 @@ export class Month extends Component<{name: string},{}> {
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>column 1 row 1</td>
-                </tr>
-                <tr>
-                    <td>column 1 row 2</td>
-                </tr>
+                {this.renderDays()}
             </tbody>
         </table>;
+    }
+    renderDays(){
+        return Array(this.props.days).fill('').map((val, id)=> {
+            if (id % 7 === 0) {
+                return (
+                    <tr key={id/7}>
+                        {Array(7).fill('').map((val, i)=> {
+                            if (id+i+1 > this.props.days) return;
+                            return (<td><Day val={id+i+1}/></td>)
+                        })}
+                    </tr>
+                )
+            }
+        })
     }
 }
 

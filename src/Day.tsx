@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 
-export class Day extends Component {
+export class Day extends Component<{val: number},{}> {
     render(){
-        return <h1>{}</h1>;
+        return <p>{this.props.val}</p>;
     }
 }
 
