@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './Calendar.css';
 import Month from './Month';
 
 const months= [
@@ -21,12 +22,13 @@ export class Calendar extends Component {
         'title': "Birthdays"
     };
     render(){
-
         return (
+          <div className="Calendar">
             <table>
               {this.renderMonths()}
             </table>
-        )
+          </div>
+        );
     }
 
     renderMonths(){
@@ -39,10 +41,10 @@ export class Calendar extends Component {
                         <td><Month name={months[id+2].name} days={months[id+2].days}/></td>
                         <td><Month name={months[id+3].name} days={months[id+3].days}/></td>
                     </tr>
-                )
+                );
             }
-            else return
-        })
+            else return null;
+        });
     }
 }
 
