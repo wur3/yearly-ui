@@ -4,7 +4,7 @@ import Month from './Month';
 
 const months= [
     {'name': 'January', 'days': 31},
-    {'name': 'February', 'days': 28},
+    {'name': 'February', 'days': 29},
     {'name': 'March', 'days': 31},
     {'name': 'April', 'days': 30},
     {'name': 'May', 'days': 31},
