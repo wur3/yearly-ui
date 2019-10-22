@@ -6,7 +6,7 @@ export class Day extends Component<{val: number},{}> {
   render(){
     return (
       <div className="Day">
-        <p>{this.props.val}</p>
+        {this.props.val}
       </div>
     );
   }

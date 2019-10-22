@@ -5,18 +5,16 @@ import Day from './Day';
 export class Month extends Component<{name: string, days: number},{}> {
   render(){
     return (
-      <div className="Month">
-        <table>
-          <thead className="MonthHeader">
-            <tr>
-              <td colSpan={7}>{this.props.name}</td>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderDays()}
-          </tbody>
-        </table>
-      </div>
+      <table className="Month">
+        <thead className="MonthHeader">
+          <tr>
+            <td colSpan={7}>{this.props.name}</td>
+          </tr>
+        </thead>
+        <tbody>
+          {this.renderDays()}
+        </tbody>
+      </table>
     );
   }
   renderDays(){

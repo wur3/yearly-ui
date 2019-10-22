@@ -23,11 +23,9 @@ export class Calendar extends Component {
     };
     render(){
         return (
-          <div className="Calendar">
-            <table>
-              {this.renderMonths()}
-            </table>
-          </div>
+          <table className="Calendar">
+            {this.renderMonths()}
+          </table>
         );
     }
 

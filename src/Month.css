@@ -2,7 +2,13 @@
   width: 25vw;
   height: 33vh;
   overflow: hidden;
+
 }
 
-.MonthHeader {
+table {
+  border: 1px solid red;
+}
+
+.MonthHeader > tr > td {
+  font-size: 1rem;
 }
