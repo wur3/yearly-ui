@@ -5,10 +5,11 @@
 }
 
 table {
-  border: 1px solid red;
+ outline: 1px solid red;
 
 }
 
 .MonthHeader > tr > td {
   font-size: 1rem;
+  line-height: 2.5;
 }
