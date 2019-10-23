@@ -1,8 +1,6 @@
 # yearly
 
-> A React app used to display highlighted events from the scope of the entire year. At the time of creation (~ 10/2019), pages like Google Calendar can display highlighted events but only from the scope of a given month. This app will be able to project selected dates while you look at the entire year. 
-
-Purpose: to finally keep track of everybody's birthdays
+> A React app used to display highlighted events from the scope of the entire year. At the time of creation (~ 10/2019), pages like Google Calendar can display highlighted events but only from the scope of a given month. This app will be able to project selected dates while you look at the entire year. Finally I will be able to keep track of everybody's birthdays.
 
 ## Tutorial
 
@@ -22,8 +20,6 @@ Pull requests and stars are always welcome. For bugs and feature requests, [plea
 ## References
 
 EVERYTHING BELOW
-
---------------------------------------------------------------------
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
