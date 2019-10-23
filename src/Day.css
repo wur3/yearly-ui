@@ -1,10 +1,23 @@
 .Day {
   height: 100%;
   padding: .5em 0;
+  cursor: default;
+  transition: background-color 1s;
 }
 
 .Day:hover {
   font-weight: bold;
-  outline: 3px solid red;
-  outline-offset: -3px;
+  background-color:#273746;
+}
+
+.highlight {
+  background-color:#B22222;
+  cursor: pointer;
+
+
+}
+
+.Day:hover.highlight {
+  background-color:#F08080;
+  outline: 0 solid #B22222;
 }
