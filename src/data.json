@@ -1,0 +1,19 @@
+{
+  "special_days": [
+    {
+      "month": 9,
+      "day": 8,
+      "desc": "My birthday"
+    },
+    {
+      "month": 3,
+      "day": 16,
+      "desc": "Mom's birthday"
+    },
+    {
+      "month": 7,
+      "day": 9,
+      "desc": "Dad's birthday"
+    }
+  ]
+}

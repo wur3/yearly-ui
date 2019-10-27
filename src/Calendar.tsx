@@ -17,7 +17,15 @@ const months= [
     {'name': 'December', 'days': 31}
 ];
 
+interface Events {
+    month: number,
+    day: number,
+    desc: string;
+};
+
 export class Calendar extends Component {
+    data = require('./data.json');
+
     state = {
         'title': "Birthdays"
     };
@@ -30,19 +38,27 @@ export class Calendar extends Component {
     }
 
     renderMonths(){
-        return months.map((month, id)=> {
-            if (id % 4 === 0) {
-                return (
-                    <tr key={id/4}>
-                        <td><Month name={month.name} days={month.days}/></td>
-                        <td><Month name={months[id+1].name} days={months[id+1].days}/></td>
-                        <td><Month name={months[id+2].name} days={months[id+2].days}/></td>
-                        <td><Month name={months[id+3].name} days={months[id+3].days}/></td>
-                    </tr>
-                );
-            }
-            else return null;
-        });
+      return (
+        <tbody>
+          {months.map((month, id)=> {
+              if (id % 4 === 0) {
+                  var idx1 = id+0,
+                  idx2 = id+1,
+                  idx3 = id+2,
+                  idx4 = id+3;
+                  return (
+                      <tr key={id/4}>
+                          <td><Month name={months[idx1].name} days={months[idx1].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx1)}/></td>
+                          <td><Month name={months[idx2].name} days={months[idx2].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx2)}/></td>
+                          <td><Month name={months[idx3].name} days={months[idx3].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx3)}/></td>
+                          <td><Month name={months[idx4].name} days={months[idx4].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx4)}/></td>
+                      </tr>
+                  );
+              }
+              else return null;
+          })}
+        </tbody>
+      );
     }
 }
 

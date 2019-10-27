@@ -2,7 +2,13 @@ import React, {Component} from 'react';
 import './Month.css';
 import Day from './Day';
 
-export class Month extends Component<{name: string, days: number},{}> {
+interface Events {
+    month: number,
+    day: number,
+    desc: string;
+};
+
+export class Month extends Component<{name: string, days: number, events: Events[]},{}> {
   render(){
     return (
       <table className="Month">
@@ -25,7 +31,7 @@ export class Month extends Component<{name: string, days: number},{}> {
             {Array(7).fill('').map((val, i)=> {
               if (id+i+1 > this.props.days) return null;
               return (
-                <td><Day val={id+i+1}/></td>
+                <td><Day val={id+i+1} events={this.props.events.filter((event: Events) => event.day === id+i+1)}/></td>
               )
             })}
           </tr>
