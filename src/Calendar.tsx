@@ -23,12 +23,24 @@ interface Events {
     desc: string;
 };
 
-export class Calendar extends Component {
+export class Calendar extends Component<{},{title: String, dayWasClicked: boolean}> {
     data = require('./data.json');
 
-    state = {
-        'title': "Birthdays"
-    };
+    constructor(props: {}) {
+      super(props);
+      this.state = {
+        title: "Birthdays",
+        dayWasClicked: false
+      };
+      this.recieveMonthDay = this.recieveMonthDay.bind(this);
+    }
+
+    recieveMonthDay(month: number, day: number) {
+      alert(`${month} ${day}`);
+      this.setState({dayWasClicked : true });
+    }
+    
+    
     render(){
         return (
           <table className="Calendar">
@@ -48,10 +60,10 @@ export class Calendar extends Component {
                   idx4 = id+3;
                   return (
                       <tr key={id/4}>
-                          <td><Month name={months[idx1].name} days={months[idx1].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx1)}/></td>
-                          <td><Month name={months[idx2].name} days={months[idx2].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx2)}/></td>
-                          <td><Month name={months[idx3].name} days={months[idx3].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx3)}/></td>
-                          <td><Month name={months[idx4].name} days={months[idx4].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx4)}/></td>
+                          <td><Month key={idx1} id={idx1+1} name={months[idx1].name} days={months[idx1].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx1)} sendMonthDay={this.recieveMonthDay}/></td>
+                          <td><Month key={idx2} id={idx2+1} name={months[idx2].name} days={months[idx2].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx2)} sendMonthDay={this.recieveMonthDay}/></td>
+                          <td><Month key={idx3} id={idx3+1} name={months[idx3].name} days={months[idx3].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx3)} sendMonthDay={this.recieveMonthDay}/></td>
+                          <td><Month key={idx4} id={idx4+1} name={months[idx4].name} days={months[idx4].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx4)} sendMonthDay={this.recieveMonthDay}/></td>
                       </tr>
                   );
               }

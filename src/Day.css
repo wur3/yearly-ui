@@ -3,6 +3,7 @@
   padding: .5em 0;
   cursor: default;
   transition: background-color 1s;
+  user-select: none;
 }
 
 .Day:hover {

@@ -8,7 +8,17 @@ interface Events {
     desc: string;
 };
 
-export class Month extends Component<{name: string, days: number, events: Events[]},{}> {
+export class Month extends Component<{name: string, id: number, days: number, events: Events[], sendMonthDay: Function},{}> {
+
+  constructor(name: string, id: number, days: number, events: Events[], sendMonthDay: Function) {
+    super({name, id, days, events, sendMonthDay});
+    this.recieveDay = this.recieveDay.bind(this);
+  }
+
+  recieveDay(day: number) {
+    this.props.sendMonthDay(this.props.id, day)
+  }
+
   render(){
     return (
       <table className="Month">
@@ -31,7 +41,7 @@ export class Month extends Component<{name: string, days: number, events: Events
             {Array(7).fill('').map((val, i)=> {
               if (id+i+1 > this.props.days) return null;
               return (
-                <td><Day val={id+i+1} events={this.props.events.filter((event: Events) => event.day === id+i+1)}/></td>
+                <td><Day val={id+i+1} events={this.props.events.filter((event: Events) => event.day === id+i+1)} sendDay={this.recieveDay}/></td>
               )
             })}
           </tr>
