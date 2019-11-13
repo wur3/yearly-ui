@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import './Calendar.css';
 import Month from './Month';
+import Menu from './Menu';
 
 const months= [
     {'name': 'January', 'days': 31},
@@ -20,33 +21,68 @@ const months= [
 interface Events {
     month: number,
     day: number,
-    desc: string;
+    desc: string
 };
 
-export class Calendar extends Component<{},{title: String, dayWasClicked: boolean}> {
+interface Props {};
+
+interface States {
+  allEvents: Events[],
+  monthClicked: number, 
+  dayClicked: number
+};
+
+export class Calendar extends Component<Props,States> {
     data = require('./data.json');
 
     constructor(props: {}) {
       super(props);
       this.state = {
-        title: "Birthdays",
-        dayWasClicked: false
+        allEvents: this.data.special_days,
+        monthClicked: 0,
+        dayClicked: 0
       };
       this.recieveMonthDay = this.recieveMonthDay.bind(this);
+      this.resetMonthDay = this.resetMonthDay.bind(this);
+      this.addEvent = this.addEvent.bind(this);
     }
 
     recieveMonthDay(month: number, day: number) {
-      alert(`${month} ${day}`);
-      this.setState({dayWasClicked : true });
+      this.setState({dayClicked : day, monthClicked : month });
+    }
+
+    resetMonthDay() {
+      this.setState({dayClicked : 0, monthClicked : 0});
     }
     
+    addEvent(newMonth: number, newDay: number, newDesc: string) {
+      const tmp: Events = {
+        month: newMonth,
+        day: newDay,
+        desc: newDesc 
+      }
+      this.data.special_days.push(tmp);
+      console.log(this.data.special_days);
+    }
+
     
     render(){
-        return (
+      const events = this.data.special_days.filter( (d: any) => {
+        return d.month === this.state.monthClicked &&
+          d.day === this.state.dayClicked;
+      });
+      const descs = events.map((d:any) => d.desc);
+      return (
+        <div>
+          {this.state.monthClicked !== 0 && 
+            <Menu monthName={months[this.state.monthClicked-1].name} monthNum={this.state.monthClicked} day={this.state.dayClicked} events={descs} reset={this.resetMonthDay} addEvent={this.addEvent}/>
+          }
+          
           <table className="Calendar">
             {this.renderMonths()}
           </table>
-        );
+        </div>
+      );
     }
 
     renderMonths(){

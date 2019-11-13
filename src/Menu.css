@@ -1,0 +1,56 @@
+.Menu {
+  padding: 1rem;
+  background-color: blueviolet;
+  width: 20rem;
+  border-radius: 1rem;
+  
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.MenuHeader {
+  width: 100%;
+  display: inline-block;
+}
+
+.MenuHeader > h2 {
+  float: left;
+  
+}
+
+button {
+  display: block;
+  padding: 0; 
+  height: 1.5rem;
+  width: 1.5rem;
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.add {
+  margin: auto;
+  /* padding: 0 5px;*/
+  background: white;
+  border-radius: 50%;
+}
+
+.close {
+  float: right;
+  margin: 0.25rem;
+  background: red;
+}
+
+h2 {
+  margin: 0;
+}
+ul {
+  margin: 0;
+  padding: 0;
+  list-style-type:none;
+  text-align: left;
+}

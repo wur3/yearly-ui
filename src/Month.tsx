@@ -8,7 +8,17 @@ interface Events {
     desc: string;
 };
 
-export class Month extends Component<{name: string, id: number, days: number, events: Events[], sendMonthDay: Function},{}> {
+interface Props {
+  name: string, 
+  id: number, 
+  days: number, 
+  events: Events[], 
+  sendMonthDay: Function
+}
+
+interface States {}
+
+export class Month extends Component<Props,States> {
 
   constructor(name: string, id: number, days: number, events: Events[], sendMonthDay: Function) {
     super({name, id, days, events, sendMonthDay});

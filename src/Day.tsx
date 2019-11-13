@@ -7,9 +7,17 @@ interface Events {
     desc: string;
 };
 
+interface Props {
+  val: number, 
+  events: Events[], 
+  sendDay: Function
+};
+
+interface States {};
+
 var classNames = require('classnames');
 
-export class Day extends Component<{val: number, events: Events[], sendDay: Function},{}> {
+export class Day extends Component<Props,States> {
   render(){
     var dayClass = classNames({
       Day: true,
