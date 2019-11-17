@@ -27,13 +27,14 @@ export class Form extends Component<Props,States> {
   handleSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
     e.preventDefault();
     this.props.sendDesc(this.state.desc);
+    this.setState({desc: ''});
   }
   
   render(){
     return (
       <form onSubmit={this.handleSubmit}>
-        <input type="text" required placeholder="New event" onChange={this.handleChange}/>
-        <input type="submit" value="Save"/>
+        <input className="form" type="text" required placeholder="New event" value={this.state.desc} onChange={this.handleChange}/>
+        <input className="add button" type="submit" value="+"/>
       </form>
     );
   }

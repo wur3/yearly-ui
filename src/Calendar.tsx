@@ -33,12 +33,10 @@ interface States {
 };
 
 export class Calendar extends Component<Props,States> {
-    data = require('./data.json');
-
     constructor(props: {}) {
       super(props);
       this.state = {
-        allEvents: this.data.special_days,
+        allEvents: require('./data.json').special_days,
         monthClicked: 0,
         dayClicked: 0
       };
@@ -61,13 +59,12 @@ export class Calendar extends Component<Props,States> {
         day: newDay,
         desc: newDesc 
       }
-      this.data.special_days.push(tmp);
-      console.log(this.data.special_days);
+      this.setState({allEvents : this.state.allEvents.concat(tmp)});
     }
 
     
     render(){
-      const events = this.data.special_days.filter( (d: any) => {
+      const events = this.state.allEvents.filter( (d: any) => {
         return d.month === this.state.monthClicked &&
           d.day === this.state.dayClicked;
       });
@@ -96,10 +93,10 @@ export class Calendar extends Component<Props,States> {
                   idx4 = id+3;
                   return (
                       <tr key={id/4}>
-                          <td><Month key={idx1} id={idx1+1} name={months[idx1].name} days={months[idx1].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx1)} sendMonthDay={this.recieveMonthDay}/></td>
-                          <td><Month key={idx2} id={idx2+1} name={months[idx2].name} days={months[idx2].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx2)} sendMonthDay={this.recieveMonthDay}/></td>
-                          <td><Month key={idx3} id={idx3+1} name={months[idx3].name} days={months[idx3].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx3)} sendMonthDay={this.recieveMonthDay}/></td>
-                          <td><Month key={idx4} id={idx4+1} name={months[idx4].name} days={months[idx4].days} events={this.data.special_days.filter((event: Events) => event.month-1 === idx4)} sendMonthDay={this.recieveMonthDay}/></td>
+                          <td><Month key={idx1} id={idx1+1} name={months[idx1].name} days={months[idx1].days} events={this.state.allEvents.filter((event: Events) => event.month-1 === idx1)} sendMonthDay={this.recieveMonthDay}/></td>
+                          <td><Month key={idx2} id={idx2+1} name={months[idx2].name} days={months[idx2].days} events={this.state.allEvents.filter((event: Events) => event.month-1 === idx2)} sendMonthDay={this.recieveMonthDay}/></td>
+                          <td><Month key={idx3} id={idx3+1} name={months[idx3].name} days={months[idx3].days} events={this.state.allEvents.filter((event: Events) => event.month-1 === idx3)} sendMonthDay={this.recieveMonthDay}/></td>
+                          <td><Month key={idx4} id={idx4+1} name={months[idx4].name} days={months[idx4].days} events={this.state.allEvents.filter((event: Events) => event.month-1 === idx4)} sendMonthDay={this.recieveMonthDay}/></td>
                       </tr>
                   );
               }

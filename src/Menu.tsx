@@ -12,15 +12,12 @@ interface Props {
 };
 
 interface States {
-  showForm: boolean;
 };
 
 export class Menu extends Component<Props,States> {
   constructor(props: Props) {
     super(props);
-    this.state = {
-      showForm: false
-    };
+    
     this.receiveDesc = this.receiveDesc.bind(this);
   }
 
@@ -43,11 +40,8 @@ export class Menu extends Component<Props,States> {
         </div>
         <ul>
             {eventItems}
-            {this.state.showForm &&
-              <Form sendDesc={this.receiveDesc}/>
-            }
-        </ul>
-        <button className="add" onClick={() => this.setState({showForm: true})}>+</button>        
+            {<Form sendDesc={this.receiveDesc}/>}
+        </ul>    
       </div>
     );
   }

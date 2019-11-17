@@ -1,3 +1,23 @@
 .Form {
-  
+  display: inline-block;
+}
+.form {
+  float: left;
+}
+
+.button {
+  display: block;
+  padding: 0; 
+  height: 1.5rem;
+  width: 1.5rem;
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.add {
+  background: white;
+  border-radius: 50%;
 }
