@@ -20,8 +20,8 @@ interface States {}
 
 export class Month extends Component<Props,States> {
 
-  constructor(name: string, id: number, days: number, events: Events[], sendMonthDay: Function) {
-    super({name, id, days, events, sendMonthDay});
+  constructor(props: Props) {
+    super(props);
     this.recieveDay = this.recieveDay.bind(this);
   }
 
@@ -51,7 +51,7 @@ export class Month extends Component<Props,States> {
             {Array(7).fill('').map((val, i)=> {
               if (id+i+1 > this.props.days) return null;
               return (
-                <td><Day val={id+i+1} events={this.props.events.filter((event: Events) => event.day === id+i+1)} sendDay={this.recieveDay}/></td>
+                <td key={`${this.props.id}_${id+i}`}><Day val={id+i+1} events={this.props.events.filter((event: Events) => event.day === id+i+1)} sendDay={this.recieveDay}/></td>
               )
             })}
           </tr>
