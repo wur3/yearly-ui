@@ -47,8 +47,7 @@ export class Calendar extends Component<Props,States> {
 
       axios.get(`http://localhost:8080/`)
         .then(res => {
-          const persons = res.data;
-          alert({ persons });
+          console.log(res.data.entity);
         })
     }
 
