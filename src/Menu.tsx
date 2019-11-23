@@ -29,8 +29,8 @@ export class Menu extends Component<Props,States> {
   }
   
   render(){
-    const eventItems = this.props.events.map( (event) =>
-        <li>{event}</li>
+    const eventItems = this.props.events.map( (event, id) =>
+        <li key={id}>{event}</li>
     )
     return (
       <div className="Menu">

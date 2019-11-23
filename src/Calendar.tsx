@@ -37,7 +37,7 @@ export class Calendar extends Component<Props,States> {
     constructor(props: Props) {
       super(props);
       this.state = {
-        allEvents: require('./data.json').special_days,
+        allEvents: [],
         monthClicked: 0,
         dayClicked: 0
       };
@@ -47,7 +47,7 @@ export class Calendar extends Component<Props,States> {
 
       axios.get(`http://localhost:8080/`)
         .then(res => {
-          console.log(res.data.entity);
+          this.setState({allEvents: res.data.entity});
         })
     }
 
