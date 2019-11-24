@@ -45,7 +45,7 @@ export class Calendar extends Component<Props,States> {
       this.resetMonthDay = this.resetMonthDay.bind(this);
       this.addEvent = this.addEvent.bind(this);
 
-      axios.get(`http://localhost:8080/`)
+      axios.get(`http://localhost:8080/events`)
         .then(res => {
           this.setState({allEvents: res.data.entity});
         })
