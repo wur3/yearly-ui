@@ -25,12 +25,19 @@ interface Events {
     desc: string
 };
 
+interface EventsWithId {
+  id: number,
+  month: number,
+  day: number,
+  desc: string
+};
+
 interface Props {};
 
 interface States {
-  allEvents: Events[],
+  allEvents: EventsWithId[],
   monthClicked: number, 
-  dayClicked: number
+  dayClicked: number,
 };
 
 export class Calendar extends Component<Props,States> {
@@ -39,46 +46,72 @@ export class Calendar extends Component<Props,States> {
       this.state = {
         allEvents: [],
         monthClicked: 0,
-        dayClicked: 0
+        dayClicked: 0,
       };
       this.recieveMonthDay = this.recieveMonthDay.bind(this);
       this.resetMonthDay = this.resetMonthDay.bind(this);
       this.addEvent = this.addEvent.bind(this);
+      this.recieveDeleteId = this.recieveDeleteId.bind(this);
 
+      this.refreshEvents();
+    }
+
+    // Get all Events from backend
+    private refreshEvents() {
       axios.get(`http://localhost:8080/events`)
         .then(res => {
           this.setState({allEvents: res.data.entity});
-        })
+        });
     }
 
+    // Recieve from Month component which Month and Day are selected
     recieveMonthDay(month: number, day: number) {
       this.setState({dayClicked : day, monthClicked : month });
     }
 
+    // Clear which Month and Day are selected (when Menu component is exited)
     resetMonthDay() {
       this.setState({dayClicked : 0, monthClicked : 0});
     }
     
+    // Send new Event to backend to be stored
     addEvent(newMonth: number, newDay: number, newDesc: string) {
-      const tmp: Events = {
+      const tempEvent: Events = {
         month: newMonth,
         day: newDay,
         desc: newDesc 
       }
-      this.setState({allEvents : this.state.allEvents.concat(tmp)});
+      
+      axios.post(`http://localhost:8080/new`, tempEvent)
+        .then(() => 
+          this.refreshEvents()
+        );
     }
 
+    // Recieve from Menu component which id to delete
+    recieveDeleteId(id: number) {
+      this.removeEvent(id);
+    }
+
+    // Remove Event with given id
+    removeEvent(id: number) {
+      axios.delete(`http://localhost:8080/${id}`)
+        .then(() => {
+          this.refreshEvents();
+        });
+    }
     
     render(){
-      const events = this.state.allEvents.filter( (d: any) => {
+      const events = this.state.allEvents.filter( (d: EventsWithId) => {
         return d.month === this.state.monthClicked &&
           d.day === this.state.dayClicked;
       });
-      const descs = events.map((d:any) => d.desc);
+      const descs = new Map<number, string>(events.map((x:EventsWithId) => [x.id, x.desc] as [number, string]));
+      
       return (
         <div>
           {this.state.monthClicked !== 0 && 
-            <Menu monthName={months[this.state.monthClicked-1].name} monthNum={this.state.monthClicked} day={this.state.dayClicked} events={descs} reset={this.resetMonthDay} addEvent={this.addEvent}/>
+            <Menu monthName={months[this.state.monthClicked-1].name} monthNum={this.state.monthClicked} day={this.state.dayClicked} events={descs} reset={this.resetMonthDay} addEvent={this.addEvent} delete={this.recieveDeleteId}/>
           }
           
           <table className="Calendar">

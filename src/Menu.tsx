@@ -3,12 +3,13 @@ import './Menu.css';
 import Form from './Form';
 
 interface Props {
-  monthName:string, 
+  monthName: string, 
   monthNum: number, 
   day: number, 
-  events: string[], 
+  events: Map<number, string>, 
   reset: Function, 
-  addEvent: Function
+  addEvent: Function,
+  delete: Function
 };
 
 interface States {
@@ -29,9 +30,11 @@ export class Menu extends Component<Props,States> {
   }
   
   render(){
-    const eventItems = this.props.events.map( (event, id) =>
-        <li key={id}>{event}</li>
+    const events = this.props.events;
+    const eventItems = Array.from( events.keys()).map( (id: number) =>
+      <li key={id}><button className="delete" onClick={() => this.props.delete(id)}>&times;</button>{events.get(+id)}</li>
     )
+    
     return (
       <div className="Menu">
         <div className="MenuHeader">
