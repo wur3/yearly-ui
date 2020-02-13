@@ -4,11 +4,12 @@
 
 ## Tutorial
 
-in progress
+1. `npm install`
+2. `npm start`
 
 ## Contributing
 
-Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/wur3/yearly/issues/new).
+Pull requests and stars are always welcome. For bugs and feature requests, [please create an issue](https://github.com/wur3/yearly-ui/issues/new).
 
 ## Author
 
